@@ -72,7 +72,7 @@ void loop() {
   if (dotSTATE == HIGH) {
     // check if the state remains HIGH
     while (digitalRead(dotPIN) ==  HIGH) {
-      delay(10);
+      delay(20);
     }
     // call the function dot to signal a dot on the LED
     dot();
@@ -81,7 +81,7 @@ void loop() {
   if (dashSTATE == HIGH) {
     // check if the state remains HIGH
     while (digitalRead(dashPIN) ==  HIGH) {
-      delay(10);
+      delay(20);
     }
     // At this point, the state should be LOW
     // call the function dash to signal a dash on the LED
@@ -91,7 +91,7 @@ void loop() {
   if (spaceSTATE == HIGH) {
     // check if the state remains HIGH
     while (digitalRead(spacePIN) ==  HIGH) {
-      delay(10);
+      delay(25);
     }
     // At this point, the state should be LOW
     // call the function space to signal a space on the LED
@@ -105,8 +105,19 @@ void loop() {
       delay(10);
       unsigned long currentMillis = millis();
       Serial.println(currentMillis - previousMillis);
-//      // Check if the 2000ms interval for signaling a WORD reset has elapsed
-      if (currentMillis - previousMillis >= interval) {
+      // Check the interval for romove the last letter entered
+      if (currentMillis - previousMillis >= interval/2) {
+        // save the last time you erase the WORD
+        previousMillis = currentMillis;
+        morseKEY="";
+        LETTER = "";
+        WORD.remove(WORD.length()-1);
+        //lcd.clear();
+        lcd.setCursor(0, 1); // bottom left
+        lcdPrintWord2();
+      }
+      // Check if the interval for remove the last word entered
+      if (currentMillis - previousMillis >= 2*interval) {
         // save the last time you erase the WORD
         previousMillis = currentMillis;
         morseKEY="";
@@ -252,6 +263,13 @@ void lcdPrintWord(){
   lcd.print(WORD);
 }
 
-
-
-
+void lcdPrintWord2(){
+  lcd.setCursor(15, 0); // top right
+  lcd.print(LETTER);
+  delay(100);
+  lcd.clear();
+  morseKEY = "";
+  WORD += LETTER;
+  lcd.setCursor(0, 1); // bottom left
+  lcd.print(WORD);
+}
