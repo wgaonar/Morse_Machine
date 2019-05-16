@@ -72,7 +72,7 @@ void loop() {
   if (dotSTATE == HIGH) {
     // check if the state remains HIGH
     while (digitalRead(dotPIN) ==  HIGH) {
-      delay(20);
+      delay(10);
     }
     // call the function dot to signal a dot on the LED
     dot();
@@ -91,7 +91,7 @@ void loop() {
   if (spaceSTATE == HIGH) {
     // check if the state remains HIGH
     while (digitalRead(spacePIN) ==  HIGH) {
-      delay(25);
+      delay(10);
     }
     // At this point, the state should be LOW
     // call the function space to signal a space on the LED

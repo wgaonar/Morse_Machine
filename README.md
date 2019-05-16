@@ -1,6 +1,6 @@
 # MORSE MACHINE WITH ARDUINO
 
-#<img src="01-images/00-movilRobotCompleted.png" width="400">
+#<img src="01-images/main.JPG" width="400">
 
 This is a simple project to apply the knowledge about arduino and the development of movil applications with App Inventor from MIT for doing a funny and a simple movil robot controlled by a running application on the cell phone and throughout Bluetooth
 
